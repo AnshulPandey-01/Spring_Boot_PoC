@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -93,9 +95,9 @@ public class UserController {
 	}
 	
 	@DeleteMapping("/user/logout")
-	public ResponseEntity<String> logout(@RequestParam("uniqueName") String uniqueName){
+	public ResponseEntity<String> logout(@RequestParam("uniqueName") String uniqueName, HttpServletRequest request){
 		System.out.println("logout...");
-		
+		System.out.println(request.getParameter("uniqueName"));
 		UserInfo u = userRepo.getOneByUniqueName(uniqueName);
 		
 		if(u == null) {
